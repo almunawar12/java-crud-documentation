@@ -149,23 +149,31 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {
 
 ```java
 private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {
-    DefaultTableModel model = (DefaultTableModel) LoadTable.getModel();
-    StringBuilder sb = new StringBuilder();
+        // TODO add your handling code here:
+        int selectedRow = LoadTable.getSelectedRow();
 
-    for (int i = 0; i < model.getRowCount(); i++) {
-        sb.append("No: ").append(i + 1)
-            .append(", NIM: ").append(model.getValueAt(i, 1))
-            .append(", Nama: ").append(model.getValueAt(i, 2))
-            .append(", Kelas: ").append(model.getValueAt(i, 3))
-            .append(", Jurusan: ").append(model.getValueAt(i, 4))
-            .append(", Username: ").append(model.getValueAt(i, 5))
-            .append(", Password: ").append(model.getValueAt(i, 6))
-            .append("\n");
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih baris data yang ingin dicetak!");
+            return;
+        }
+
+        DefaultTableModel model = (DefaultTableModel) LoadTable.getModel();
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Data Mahasiswa:\n")
+                .append("NIM: ").append(model.getValueAt(selectedRow, 0)).append("\n")
+                .append("Nama: ").append(model.getValueAt(selectedRow, 1)).append("\n")
+                .append("Kelas: ").append(model.getValueAt(selectedRow, 2)).append("\n")
+                .append("Jurusan: ").append(model.getValueAt(selectedRow, 3)).append("\n")
+                .append("Username: ").append(model.getValueAt(selectedRow, 4)).append("\n")
+                .append("Password: ").append(model.getValueAt(selectedRow, 5)).append("\n");
+
+        // Cetak di console
+        System.out.println(sb.toString());
+
+        // Tampilkan pop-up
+        JOptionPane.showMessageDialog(this, sb.toString(), "Cetak Data", JOptionPane.INFORMATION_MESSAGE);
     }
-
-    System.out.println(sb.toString());
-    JOptionPane.showMessageDialog(this, sb.toString(), "Data Mahasiswa", JOptionPane.INFORMATION_MESSAGE);
-}
 ```
 
 ---
